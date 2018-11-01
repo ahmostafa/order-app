@@ -1,3 +1,89 @@
-<p>
-  user-data works!
-</p>
+<div class="container" fxLayout="column" fxLayoutGap="10px">
+    <div fxFlex fxFlexOffset="20px" class="form-size">
+        <form novalidate [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
+            <p>
+                <mat-form-field class="quarter-width">
+                    <mat-select formControlName="userTitle" placeholder="Anrede *">
+                        <mat-option *ngFor="let title of titles" [value]="title.value">
+                            {{title.viewValue}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="userDataForm.get('userTitle').invalid">
+                        {{getErrorMessage('userTitle')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="half-width field-right-small-margin">
+                    <input matInput formControlName="firstName" placeholder="Vorname" type="text" required/>
+                    <mat-error *ngIf="userDataForm.get('firstName').invalid">
+                        {{getErrorMessage('firstName')}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="lastName" placeholder="Nachname" type="text" required/>
+                    <mat-error *ngIf="userDataForm.get('lastName').invalid">
+                        {{getErrorMessage('lastName')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="three-quarter-width field-right-small-margin">
+                    <input matInput formControlName="street" placeholder="Straße" type="text" required/>
+                    <mat-error *ngIf="userDataForm.get('street').invalid">
+                        {{getErrorMessage('street')}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="quarter-width">
+                    <input matInput formControlName="homeNumber" placeholder="Haus Nr" type="text" required/>
+                    <mat-error *ngIf="userDataForm.get('homeNumber').invalid">
+                        {{getErrorMessage('homeNumber')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class=" quarter-width field-right-small-margin">
+                    <input matInput formControlName="postCode" placeholder="PLZ" min="1" type="number" required/>
+                    <mat-error *ngIf="userDataForm.get('postCode').invalid">
+                        {{getErrorMessage('postCode')}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="three-quarter-width">
+                    <input matInput formControlName="placeOfResidence" placeholder="Whonort" type="text" required/>
+                    <mat-error *ngIf="userDataForm.get('placeOfResidence').invalid">
+                        {{getErrorMessage('placeOfResidence')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="half-width">
+                    <mat-select formControlName="userCountry" placeholder="Land *">
+                        <mat-option *ngFor="let country of countries" [value]="country.code">
+                            {{country.name}}
+                        </mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="userDataForm.get('userCountry').invalid">
+                        {{getErrorMessage('userCountry')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>
+                <mat-form-field class="quarter-width field-right-quarter-width-margin">
+                    <input matInput [matDatepicker]="picker" [max]="maxDate" formControlName="dateOfBirth" placeholder="Geburtsdatum" required/>
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                    <mat-error *ngIf="userDataForm.get('dateOfBirth').invalid">
+                        {{getErrorMessage('dateOfBirth')}}
+                    </mat-error>
+                </mat-form-field>
+                <mat-form-field class="half-width">
+                    <input matInput formControlName="email" placeholder="Ihre E-Mail Adresse" type="email" required/>
+                    <mat-error *ngIf="userDataForm.get('email').invalid">
+                        {{getErrorMessage('email')}}
+                    </mat-error>
+                </mat-form-field>
+            </p>
+            <p>{{userDataForm.value|json}} {{userDataForm.status|json}}</p>
+        </form>
+    </div>
+</div>
