@@ -10,4 +10,20 @@ export class DateValidator {
        return null;
     }
 
+    static checkAgePlusEighteen(control: FormControl ): { [key: string]: any} {
+        const result = (DateValidator.getAge(control.value) < 18) ? {'underAge': true} : null;
+        console.log(DateValidator.getAge(control.value));
+        return result;
+    }
+    private static getAge(birthDateStr): number {
+        let result =  0;
+        const today = new Date();
+        const birthDate = new Date (birthDateStr);
+        result = today.getFullYear() - birthDate.getFullYear();
+        const month = today.getMonth() - birthDate.getMonth();
+        if (month < 0 || (month === 0 && today.getDate() < birthDate.getDate())) {
+        --result;
+        }
+        return result;
+    }
 }

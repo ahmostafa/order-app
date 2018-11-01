@@ -243,3 +243,9 @@ export const COUNTRIES  = [
     {'name': 'Zambia', 'code': 'ZM'},
     {'name': 'Zimbabwe', 'code': 'ZW'}
     ];
+
+
+export const TITLES = [
+    {value: 'herr', viewValue: 'Herr'},
+    {value: 'frau', viewValue: 'Frau'}
+  ];
