@@ -1,25 +1,26 @@
 <div class="container" fxLayout="row" fxLayoutGap="50px">
-  <div fxFlex="25"   >
-      <mat-card class="example-card">
-          <mat-card-header>
-            <mat-card-title ><h3>Ihre Bestellung</h3></mat-card-title>
-            <mat-card-subtitle>Die offiziellen deutschen 5-Euro-Münzen 2016–2021 komplett</mat-card-subtitle>
-          </mat-card-header>
-          <img style="height: 100px; width: 100px;" mat-card-image src="https://i1.adis.ws/i/MDM/?$mf_liste_Sammlung_folderabo_rund_neu_miniwarenkorb$&$ps_miniwarenkorb$&muenze_1=subtropische_zone_vs&muenze_2=Subtropisch_A&muenze_3=5-Euro-Motiv&muenze_4=5-E-Klimazone-VS_neu&muenze_5=Planet_Erde&muenze_6=Planet_Erde_5&muenze_7=G_350044-001_350045-001_350046-001_1&muenze_8=350044_1&muenze_9=350044_2_1&muenze_11=350044_3&wa_1=1303260103_geschlossen&wa_2=subtropische_zone_ehz" alt="Photo of a Shiba Inu">
-          <mat-card-content>
-            <p>
-              The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan.
-              A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally
-              bred for hunting.
-            </p>
-          </mat-card-content>
-          <mat-card-actions>
-            <button mat-button>LIKE</button>
-            <button mat-button>SHARE</button>
-          </mat-card-actions>
+    <div fxFlex="25">
+        <mat-card class="example-card">
+            <mat-card-header>
+                <mat-card-title>
+                    <h3>Ihre Bestellung</h3>
+                </mat-card-title>
+                <mat-card-subtitle>Die offiziellen deutschen 5-Euro-Münzen 2016–2021 komplett</mat-card-subtitle>
+            </mat-card-header>
+            <img style="height: 100px; width: 100px;" mat-card-image src="https://i1.adis.ws/i/MDM/?$mf_liste_Sammlung_folderabo_rund_neu_miniwarenkorb$&$ps_miniwarenkorb$&muenze_1=subtropische_zone_vs&muenze_2=Subtropisch_A&muenze_3=5-Euro-Motiv&muenze_4=5-E-Klimazone-VS_neu&muenze_5=Planet_Erde&muenze_6=Planet_Erde_5&muenze_7=G_350044-001_350045-001_350046-001_1&muenze_8=350044_1&muenze_9=350044_2_1&muenze_11=350044_3&wa_1=1303260103_geschlossen&wa_2=subtropische_zone_ehz"
+                alt="Photo of a Shiba Inu">
+            <mat-card-content>
+                <p>
+                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
+                </p>
+            </mat-card-content>
+            <mat-card-actions>
+                <button mat-button>LIKE</button>
+                <button mat-button>SHARE</button>
+            </mat-card-actions>
         </mat-card>
-  </div>
-    <div fxFlex="75"  class="form-size">
+    </div>
+    <div fxFlex="75" class="form-size">
         <form novalidate [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="quarter-width">
@@ -35,7 +36,7 @@
             </p>
             <p>
                 <mat-form-field class="half-width field-right-small-margin">
-                    <input matInput readonly formControlName="firstName" placeholder="Vorname" type="text" required/>
+                    <input matInput formControlName="firstName" placeholder="Vorname" type="text" required/>
                     <mat-error *ngIf="userDataForm.get('firstName').invalid">
                         {{getErrorMessage('firstName')}}
                     </mat-error>
