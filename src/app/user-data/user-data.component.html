@@ -1,6 +1,6 @@
-<div class="container" fxLayout="row" fxLayoutGap="50px">
-    <div fxFlex="25">
-        <mat-card class="example-card">
+<div class="container" fxLayout="row" fxFlexOffset="5" fxLayoutGap="50px">
+    <div fxFlex="30" class="product-card-dop" fxLayout="column" fxLayoutGap="2px">
+        <!-- <mat-card class="example-card">
             <mat-card-header>
                 <mat-card-title>
                     <h3>Ihre Bestellung</h3>
@@ -18,9 +18,37 @@
                 <button mat-button>LIKE</button>
                 <button mat-button>SHARE</button>
             </mat-card-actions>
-        </mat-card>
+        </mat-card> -->
+        <div fxFlex="20">
+            <h3>Ihre Bestellung</h3>
+            <div class="subtitle-dop">Die offiziellen deutschen 5-Euro-Münzen 2016–2021 komplett</div>
+        </div>
+        <div class="available-container-dop" fxFlex="18" fxLayout="row">
+            <img class="thumbnail-dop" fxLayout="column" fxFlex src="https://mdm.scene7.com/is/image/MDM/mf_liste_Sammlung_folderabo_rund_neu_miniwarenkorb?$miniwarenkorb$&$muenze_1=subtropische_zone_vs&$muenze_2=Subtropisch_A&$muenze_3=5-Euro-Motiv&$muenze_4=5-E-Klimazone-VS_neu&$muenze_5=Planet_Erde&$muenze_6=Planet_Erde_5&$muenze_7=G_350044-001_350045-001_350046-001_1&$muenze_8=350044_1&$muenze_9=350044_2_1&$muenze_11=350044_3&$wa_1=1303260103_geschlossen&$wa_2=subtropische_zone_ehz">
+            <div fxFlexAlign="center" fxLayout="column" fxFlex="80">
+                <div class="available-text">Verfügbar</div>
+                <div>Lieferzeit: 1-2 Wochen</div>
+            </div>
+        </div>
+        <div fxFlex="3" fxFlexAlign="center">
+            <div class="subtitle-dop old-price-dop">
+                Statt&nbsp;<span>{{12.90| currency:'EUR'}}</span></div>
+        </div>
+        <div fxFlex="10" fxLayout="row">
+            <div fxFlex="20" fxLayout="column" fxFlexAlign="baseline">
+                <mat-form-field>
+                    <mat-select placeholder="" [value]="1">
+                        <mat-option *ngFor="let number of [1,2,3,4]" [value]="number">
+                            {{number}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div fxFlex="5" fxFlexAlign="baseline" fxLayout="column"><span>&nbsp;X</span></div>
+        </div>
+
     </div>
-    <div fxFlex="75" class="form-size">
+    <div fxFlex="70" class="form-size">
         <form novalidate [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
             <p>
                 <mat-form-field class="quarter-width">
