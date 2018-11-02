@@ -1,5 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatFormFieldModule, MatInputModule, MatButtonModule, MatNativeDateModule, MAT_DATE_LOCALE} from '@angular/material';
@@ -14,7 +14,9 @@ import { AppComponent } from './app.component';
 import { UserDataComponent } from './user-data/user-data.component';
 import { HeaderComponent } from './header/header.component';
 import { FooterComponent } from './footer/footer.component';
-
+import localeDe from '@angular/common/locales/de';
+import { registerLocaleData } from '@angular/common';
+registerLocaleData(localeDe, 'de');
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,7 +40,9 @@ import { FooterComponent } from './footer/footer.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}], // to format date in DD/MM/YYYY
+  providers: [{provide: MAT_DATE_LOCALE, useValue: 'en-GB'}// to format date in DD/MM/YYYY
+, { provide: LOCALE_ID, useValue: 'de' }
+], // to format date in DD/MM/YYYY
   bootstrap: [AppComponent]
 })
 export class AppModule { }
