@@ -1,6 +1,14 @@
+$component-background: #fff;
+$old-price-color:#aa2c52;
+$available-color:#090;
+.form-class {
+    background-color: $component-background;
+    padding-left: 20px;
+}
+
 .full-width {
     width: 95%;
-    max-width: 95%;
+    // max-width: 95%;
 }
 
 .field-right-small-margin {
@@ -28,9 +36,13 @@
 }
 
 .product-card-dop {
+    background-color: $component-background;
     padding: 10px;
     .subtitle-dop {
-        font: normal 14px/1.4 Arial, sans-serif;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 12px;
+        font-weight: normal;
+        line-height: 16px;
     }
     .thumbnail-dop {
         min-width: 100px;
@@ -42,22 +54,42 @@
             font-size: 11px;
             line-height: 13px;
             .available-text {
-                color: #090;
+                color: $available-color;
+                font-weight: bold
+            }
+            .not-available-text {
+                color: $old-price-color;
                 font-weight: bold
             }
         }
     }
-    .old-price-dop {
-        color: #aa2c52;
+    .price {
         font-family: Arial, Helvetica, sans-serif;
         font-size: 12px;
         font-weight: normal;
         line-height: 16px;
-        span {
-            text-decoration-line: line-through;
-            text-decoration-style: initial;
-            text-decoration-color: initial;
-            font-weight: bold;
+        &.old-price-dop {
+            color: $old-price-color;
+            span {
+                text-decoration-line: line-through;
+                text-decoration-style: initial;
+                text-decoration-color: initial;
+                font-weight: bold;
+            }
         }
+    }
+    .text-info {
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 8px;
+        font-weight: normal;
+        &.text-info-rigth {
+            text-align: right;
+        }
+    }
+    .total-price-content {
+        border-top: 2px solid #4c4c4c;
+    }
+    .double-bottom-lines {
+        border-bottom: 7px double #4c4c4c;
     }
 }

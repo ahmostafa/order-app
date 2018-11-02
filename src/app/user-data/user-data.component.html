@@ -1,55 +1,58 @@
 <div class="container" fxLayout="row" fxFlexOffset="5" fxLayoutGap="50px">
     <div fxFlex="30" class="product-card-dop" fxLayout="column" fxLayoutGap="2px">
-        <!-- <mat-card class="example-card">
-            <mat-card-header>
-                <mat-card-title>
-                    <h3>Ihre Bestellung</h3>
-                </mat-card-title>
-                <mat-card-subtitle>Die offiziellen deutschen 5-Euro-Münzen 2016–2021 komplett</mat-card-subtitle>
-            </mat-card-header>
-            <img style="height: 100px; width: 100px;" mat-card-image src="https://i1.adis.ws/i/MDM/?$mf_liste_Sammlung_folderabo_rund_neu_miniwarenkorb$&$ps_miniwarenkorb$&muenze_1=subtropische_zone_vs&muenze_2=Subtropisch_A&muenze_3=5-Euro-Motiv&muenze_4=5-E-Klimazone-VS_neu&muenze_5=Planet_Erde&muenze_6=Planet_Erde_5&muenze_7=G_350044-001_350045-001_350046-001_1&muenze_8=350044_1&muenze_9=350044_2_1&muenze_11=350044_3&wa_1=1303260103_geschlossen&wa_2=subtropische_zone_ehz"
-                alt="Photo of a Shiba Inu">
-            <mat-card-content>
-                <p>
-                    The Shiba Inu is the smallest of the six original and distinct spitz breeds of dog from Japan. A small, agile dog that copes very well with mountainous terrain, the Shiba Inu was originally bred for hunting.
-                </p>
-            </mat-card-content>
-            <mat-card-actions>
-                <button mat-button>LIKE</button>
-                <button mat-button>SHARE</button>
-            </mat-card-actions>
-        </mat-card> -->
+
         <div fxFlex="20">
             <h3>Ihre Bestellung</h3>
-            <div class="subtitle-dop">Die offiziellen deutschen 5-Euro-Münzen 2016–2021 komplett</div>
+            <div class="subtitle-dop">{{selectedProduct.shortDescription}}</div>
         </div>
         <div class="available-container-dop" fxFlex="18" fxLayout="row">
-            <img class="thumbnail-dop" fxLayout="column" fxFlex src="https://mdm.scene7.com/is/image/MDM/mf_liste_Sammlung_folderabo_rund_neu_miniwarenkorb?$miniwarenkorb$&$muenze_1=subtropische_zone_vs&$muenze_2=Subtropisch_A&$muenze_3=5-Euro-Motiv&$muenze_4=5-E-Klimazone-VS_neu&$muenze_5=Planet_Erde&$muenze_6=Planet_Erde_5&$muenze_7=G_350044-001_350045-001_350046-001_1&$muenze_8=350044_1&$muenze_9=350044_2_1&$muenze_11=350044_3&$wa_1=1303260103_geschlossen&$wa_2=subtropische_zone_ehz">
+            <img class="thumbnail-dop" fxLayout="column" fxFlex src={{selectedProduct.imageThumbUrl}}>
             <div fxFlexAlign="center" fxLayout="column" fxFlex="80">
-                <div class="available-text">Verfügbar</div>
+                <div *ngIf="selectedProduct.isAvailable" class="available-text">Verfügbar</div>
+                <div *ngIf="!selectedProduct.isAvailable" class="not-available-text">Nicht Verfügbar</div>
                 <div>Lieferzeit: 1-2 Wochen</div>
             </div>
         </div>
         <div fxFlex="3" fxFlexAlign="center">
-            <div class="subtitle-dop old-price-dop">
-                Statt&nbsp;<span>{{12.90| currency:'EUR'}}</span></div>
+            <div *ngIf="selectedProduct.onSale" class="price old-price-dop">
+                Statt&nbsp;<span>{{ selectedProduct.regularPrice | currency: selectedProduct.currency}}</span></div>
         </div>
         <div fxFlex="10" fxLayout="row">
-            <div fxFlex="20" fxLayout="column" fxFlexAlign="baseline">
+            <div fxFlex="12" fxLayout="column" fxFlexAlign="baseline">
                 <mat-form-field>
-                    <mat-select placeholder="" [value]="1">
-                        <mat-option *ngFor="let number of [1,2,3,4]" [value]="number">
-                            {{number}}
+                    <mat-select (selectionChange)="changeQuantity($event.value)" placeholder="" [value]="1">
+                        <mat-option *ngFor="let number of quantityArray" [value]="number+1">
+                            {{number+1}}
                         </mat-option>
                     </mat-select>
                 </mat-form-field>
             </div>
-            <div fxFlex="5" fxFlexAlign="baseline" fxLayout="column"><span>&nbsp;X</span></div>
+            <div fxFlex="5" fxFlexAlign="baseline"><span>&nbsp;X</span></div>
+            <div fxFlex class="price" fxFlexOffset="32" fxFlexAlign="baseline">{{quantityPrice|currency:selectedProduct.currency}}</div>
+            <div fxFlex fxLayoutAlign="end" fxFlexAlign="baseline" class="text-info">Zwischensumme</div>
         </div>
+        <div fxFlex="5" fxLayout="row">
 
+            <div fxFlex class="price" fxFlexOffset="49" fxFlexAlign="baseline">{{delivaryFees|currency:selectedProduct.currency}}</div>
+            <div fxFlex fxLayoutAlign="end" fxFlexAlign="baseline" class="text-info text-info-rigth">Versandkosten & Verpackung</div>
+        </div>
+        <div fxFlex="5" fxLayout="row" class="total-price-content">
+            <div fxFlex="7" fxLayoutAlign="start" class="price ">
+                Gesamtbetrag:
+            </div>
+            <div fxFlex class="price" fxLayoutAlign="center">{{totalPriceWithFees|currency:selectedProduct.currency}}</div>
+
+        </div>
+        <div fxFlex="3" fxLayout="row" class="double-bottom-lines">
+            <div class="text-info">Differenzbesteuert nach § 25a UStG</div>
+        </div>
+        <br>
+        <div fxFlex="7" fxFlexOffset="15" fxLayoutAlign="center">
+            <button class="full-width" color="primary" [disabled]="userDataForm.invalid || !selectedProduct.isAvailable" (click)="userDataFormID.ngSubmit.emit()" mat-raised-button>Kaufen&nbsp;&gt;</button>
+        </div>
     </div>
-    <div fxFlex="70" class="form-size">
-        <form novalidate [formGroup]="userDataForm" (ngSubmit)="onSubmit()">
+    <div fxFlex="70" class="form-size form-class">
+        <form novalidate [formGroup]="userDataForm" #userDataFormID="ngForm" (ngSubmit)="makeOrder()">
             <p>
                 <mat-form-field class="quarter-width">
                     <mat-select formControlName="userTitle" placeholder="Anrede *">
@@ -106,7 +109,7 @@
             </p>
             <p>
                 <mat-form-field class="half-width">
-                    <mat-select formControlName="userCountry" placeholder="Land *">
+                    <mat-select formControlName="userCountry" (selectionChange)="changeCountry($event.value)" placeholder="Land *">
                         <mat-option *ngFor="let country of countries" [value]="country.code">
                             {{country.name}}
                         </mat-option>
@@ -132,6 +135,7 @@
                     </mat-error>
                 </mat-form-field>
             </p>
+            <button class="full-width" type="submit" color="primary" mat-raised-button>Kaufen&nbsp;&gt;</button>
             <p>{{userDataForm.value|json}} {{userDataForm.status|json}}</p>
         </form>
     </div>
