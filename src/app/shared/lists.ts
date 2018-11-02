@@ -246,6 +246,6 @@ export const COUNTRIES  = [
 
 
 export const TITLES = [
-    {value: 'herr', viewValue: 'Herr'},
-    {value: 'frau', viewValue: 'Frau'}
+    {value: 'Herr', viewValue: 'Herr'},
+    {value: 'Frau', viewValue: 'Frau'}
   ];

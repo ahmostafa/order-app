@@ -1,5 +1,5 @@
 export class User {
-    title: string;
+    userTitle: string;
     firstName: string;
     lastName: string;
     email: string;
@@ -7,9 +7,12 @@ export class User {
 
     // below data can be in address class
     street: string;
-    postCode: number; // it can be string also
+    postCode: string; // it can be string also
     homeNumber: string;
     placeOfResidence: string;
     country: string;
+    constructor() {
+
+    }
 }
 

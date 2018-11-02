@@ -4,6 +4,8 @@ import { COUNTRIES, TITLES } from './../shared/lists';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { DateValidator } from '../shared/customValidator/dateValidator';
+import { Order } from '../shared/user/order';
+import { User } from '../shared/user/user';
 @Component({
   selector: 'app-user-data',
   templateUrl: './user-data.component.html',
@@ -11,6 +13,8 @@ import { DateValidator } from '../shared/customValidator/dateValidator';
 })
 export class UserDataComponent implements OnInit {
   userDataForm: FormGroup;
+  private orderData: Order;
+  private userData: User;
   private selectedProduct: Product;
   private maxDate: Date;
   private quantityArray: number[];
@@ -18,6 +22,7 @@ export class UserDataComponent implements OnInit {
   private oneItemPrice = 0;
   private totalPriceWithFees = 0;
   private delivaryFees = 0;
+  private quantityOrder = 1 ;
   private  ChargeOutSideGermany = 13.88;
   // tslint:disable-next-line:max-line-length
   private dateEnFormatRegex = new RegExp('(^(((0[1-9]|[12]\d|3[01])\/(0[13578]|1[02])\/((19|[2-9]\d)\d{2}))|((0[1-9]|[12]\d|30)\/(0[13456789]|1[012])\/((19|[2-9]\d)\d{2}))|((0[1-9]|1\d|2[0-8])\/02\/((19|[2-9]\d)\d{2}))|(29\/02\/((1[6-9]|[2-9]\d)(0[48]|[2468][048]|[13579][26])|((16|[2468][048]|[3579][26])00))))$)');
@@ -74,7 +79,28 @@ export class UserDataComponent implements OnInit {
     console.log('AAA');
 
     if ( !this.userDataForm.invalid ) {
-      // this.userDataForm.markAsDirty();
+     this.userData = this.userDataForm.value;
+    //  this.userData.userTitle = this.userDataForm.value['userTitle'];
+    //  this.userData.firstName = this.userDataForm.value['firstName'];
+    //  this.userData.lastName = this.userDataForm.value['lastName'];
+    //  this.userData.country = this.userDataForm.value['userCountry'];
+    //  this.userData.street = this.userDataForm.value['street'];
+    //  this.userData.homeNumber = this.userDataForm.value['homeNumber'];
+    //  this.userData.postCode = this.userDataForm.value['postCode'];
+    //  this.userData.placeOfResidence = this.userDataForm.value['placeOfResidence'];
+    //  this.userData.dateOfBirth = this.userDataForm.value['dateOfBirth'];
+    //  this.userData.email = this.userDataForm.value['email'];
+
+     this.orderData = new Order();
+     this.orderData.date = Date.now().toString();
+     this.orderData.user = this.userData;
+     this.orderData.quantity = this.quantityOrder;
+     this.orderData.product = this.selectedProduct;
+
+     this.resetForm();
+     alert(`${this.orderData.user.userTitle} ${this.orderData.user.lastName}, \n Ihre Bestellung wurde erfolgreich übermittelt.
+     Sie erhalten innerhalb von wenigen Minuten eine Bestell-Bestätigungs-E-Mail an ${this.orderData.user.email}.`);
+
     }
   }
   private createUserDataForm(): void {
@@ -102,6 +128,7 @@ export class UserDataComponent implements OnInit {
   }
 
   private changeQuantity(value) {
+    this.quantityOrder = value;
     this.quantityPrice = this.oneItemPrice * value;
     this.totalPriceWithFees = this.quantityPrice +  this.delivaryFees;
   }
@@ -119,6 +146,25 @@ export class UserDataComponent implements OnInit {
   }
   updateDelivaryFees(extraFees) {
     this.delivaryFees = this.selectedProduct.delivaryFees + extraFees;
+  }
+
+  resetForm() {
+    this.userDataForm.reset({
+      userTitle: '',
+      firstName: '',
+      lastName: '',
+      userCountry: '',
+      street: '',
+      homeNumber: '',
+      postCode: '',
+      placeOfResidence : '',
+      // tslint:disable-next-line:max-line-length
+      dateOfBirth: '',
+      email: ''
+    });
+    this.userDataForm.markAsPristine();
+    this.userDataForm.markAsUntouched();
+    this.userDataForm.updateValueAndValidity();
   }
 
 }
